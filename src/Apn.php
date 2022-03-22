@@ -252,8 +252,12 @@ class Apn extends PushService implements PushServiceInterface
     public function prepareHandle($deviceToken, array $message)
     {
         $uri = false === $this->config['dry_run'] ? $this->getProductionUrl($deviceToken) : $this->getSandboxUrl($deviceToken);
-        $headers = $message['headers'];
-        unset($message['headers']);
+        $headers = [];
+        if (isset($message['headers'])) {
+            $headers = $message['headers'];
+            unset($message['headers']);
+            $headers = $this->handleHeaders($headers);
+        }
         $body = json_encode($message);
 
         $config = $this->config;
@@ -284,6 +288,51 @@ class Apn extends PushService implements PushServiceInterface
         curl_setopt($ch, CURLOPT_PRIVATE, $deviceToken);
 
         return $ch;
+    }
+
+    private function handleHeaders($headers)
+    {
+        $handeledHeaders = [];
+
+        if (isset($headers['apns-push-type'])) {
+            $handeledHeaders = $headers['apns-push-type'];
+
+            // alert
+            // background
+            // location
+            // voip
+            // complication
+            // fileprovider
+            // mdm
+        }
+
+        if (isset($headers['apns-id'])) {
+            $handeledHeaders = $headers['apns-id'];
+        }
+
+        if (isset($headers['apns-expiration'])) {
+            $handeledHeaders = $headers['apns-expiration'];
+        }
+
+        if (isset($headers['apns-priority'])) {
+            $handeledHeaders = $headers['apns-priority'];
+        }
+
+        if (isset($headers['apns-topic'])) {
+            $handeledHeaders = $headers['apns-topic'];
+
+            // app’s bundle ID
+            // apns-push-type location: app’s bundle ID with.location-query
+            // apns-push-type voip: app’s bundle ID with.voip
+            // apns-push-type complication: app’s bundle ID with.complication
+            // apns-push-type fileprovider: app’s bundle ID with.pushkit.fileprovider
+        }
+
+        if (isset($headers['apns-collapse-id'])) {
+            $handeledHeaders = $headers['apns-collapse-id'];
+        }
+
+        return $handeledHeaders;
     }
 
     /**

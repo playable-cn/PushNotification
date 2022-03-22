@@ -1,5 +1,8 @@
 #   ChangeLog
 
+##  v2.2
+fork and add some features
+
 ##  v2.1
 Laravel Facade Usage integrated into the package.
 

@@ -262,8 +262,8 @@ $push->setMessage([
                 'sound' => 'default'
                 ],
         'data' => [
-                'extraPayLoad1' => 'value1',
-                'extraPayLoad2' => 'value2'
+                'ext1' => 'value1',
+                'ext2' => 'value2'
                 ]
         ])
         ->setApiKey('Server-API-Key')
@@ -282,7 +282,7 @@ $push->setMessage([
                 'badge' => 1
 
             ],
-            'extraPayLoad' => [
+            'ext' => [
                 'custom' => 'My custom data',
             ]
         ])
@@ -297,8 +297,8 @@ $push->setMessage([
                'sound' => 'default'
                ],
        'data' => [
-               'extraPayLoad1' => 'value1',
-               'extraPayLoad2' => 'value2'
+               'ext1' => 'value1',
+               'ext2' => 'value2'
                ]
        ]);
 $push->setApiKey('Server-API-Key');
@@ -306,6 +306,20 @@ $push->setDevicesToken(['deviceToken1'
     ,'deviceToken2',
     'deviceToken3'
 ]);
+```
+
+voip push
+```php
+$push->setMessage([
+            'headers' => [
+                'apns-push-type' => 'voip',
+                'apns-expiration' => 0,
+                'apns-topic' => 'your.app.bundleid.voip',
+            ],
+            'ext' => 'json_encode_string'
+        ])
+    ->setDevicesToken(['deviceToken1','deviceToken2','deviceToken3'...]);
+
 ```
 If you want send the notification to only 1 device, you may pass the value as string.
 ```php
@@ -323,8 +337,8 @@ $push->setMessage([
                'sound' => 'default'
                ],
        'data' => [
-               'extraPayLoad1' => 'value1',
-               'extraPayLoad2' => 'value2'
+               'ext1' => 'value1',
+               'ext2' => 'value2'
                ]
        ])
     ->setApiKey('Server-API-Key')
@@ -377,8 +391,8 @@ $push->setMessage([
                    'sound' => 'default'
                    ],
            'data' => [
-                   'extraPayLoad1' => 'value1',
-                   'extraPayLoad2' => 'value2'
+                   'ext1' => 'value1',
+                   'ext2' => 'value2'
                    ]
            ]);
 ```
@@ -480,8 +494,8 @@ PushNotification::setService('fcm')
                                      'sound' => 'default'
                                      ],
                              'data' => [
-                                     'extraPayLoad1' => 'value1',
-                                     'extraPayLoad2' => 'value2'
+                                     'ext1' => 'value1',
+                                     'ext2' => 'value2'
                                      ]
                              ])
                         ->setApiKey('Server-API-Key')

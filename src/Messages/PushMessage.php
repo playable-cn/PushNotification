@@ -60,6 +60,21 @@ class PushMessage
     public $color = '#000000';
 
     /**
+     * @var array
+     */
+    public $headers = [];
+
+    /**
+     * @var string
+     */
+    public $pushType = null;
+
+    /**
+     * @var \DateTime|null
+     */
+    public $expiresAt = null;
+
+    /**
      * Create a new message instance.
      *
      * @param  string  $body
@@ -203,6 +218,45 @@ class PushMessage
     public function config(array $config)
     {
         $this->config = $config;
+
+        return $this;
+    }
+
+    /**
+     * Set message headers.
+     *
+     * @param  array $headers
+     * @return $this
+     */
+    public function headers(array $headers)
+    {
+        $this->headers = $headers;
+
+        return $this;
+    }
+
+    /**
+     * Set the message push type.
+     *
+     * @param  string $pushType
+     * @return $this
+     */
+    public function pushType($pushType)
+    {
+        $this->pushType = $pushType;
+
+        return $this;
+    }
+
+    /**
+     * Set the message push expiration time.
+     *
+     * @param  string $expiresAt
+     * @return $this
+     */
+    public function expiresAt($expiresAt)
+    {
+        $this->expiresAt = $expiresAt;
 
         return $this;
     }
