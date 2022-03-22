@@ -4,7 +4,7 @@ namespace Edujugon\PushNotification\Channels;
 
 use Edujugon\PushNotification\Messages\PushMessage;
 
-class ApnChannel extends PushChannel
+class ApnVoipChannel extends PushChannel
 {
     /**
      * {@inheritdoc}
@@ -19,23 +19,10 @@ class ApnChannel extends PushChannel
      */
     protected function buildData(PushMessage $message)
     {
-        $data = [
-            'aps' => [
-                'alert' => [
-                    'title' => $message->title,
-                    'body' => $message->body,
-                ],
-                'category' => $message->category,
-                'sound' => $message->sound,
-            ],
-        ];
+        $data = [];
 
         if (! empty($message->extra)) {
             $data['extra'] = $message->extra;
-        }
-
-        if (is_numeric($message->badge)) {
-            $data['aps']['badge'] = $message->badge;
         }
 
         return $data;

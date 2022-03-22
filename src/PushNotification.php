@@ -43,6 +43,13 @@ class PushNotification
     protected $message = [];
 
     /**
+     * headers to be sent.
+     *
+     * @var array
+     */
+    protected $headers = [];
+
+    /**
      * PushNotification constructor.
      * @param String / a service name of the services list.
      */
@@ -86,6 +93,18 @@ class PushNotification
         return $this;
     }
 
+    /**
+     * Set the headers of the notification.
+     *
+     * @param array $data
+     * @return $this
+     */
+    public function setHeaders(array $data)
+    {
+        $this->headers = $data;
+
+        return $this;
+    }
 
     /**
      * @param array/string $deviceTokens
@@ -164,6 +183,7 @@ class PushNotification
      */
     public function send()
     {
+        $this->message['headers'] = $this->headers;
         $this->service->send($this->deviceTokens, $this->message);
 
         return $this;
