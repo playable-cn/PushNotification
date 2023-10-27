@@ -295,7 +295,7 @@ class Apn extends PushService implements PushServiceInterface
         $handeledHeaders = [];
 
         if (isset($headers['apns-push-type'])) {
-            $handeledHeaders = $headers['apns-push-type'];
+            $handeledHeaders['apns-push-type'] = $headers['apns-push-type'];
 
             // alert
             // background
@@ -307,19 +307,19 @@ class Apn extends PushService implements PushServiceInterface
         }
 
         if (isset($headers['apns-id'])) {
-            $handeledHeaders = $headers['apns-id'];
+            $handeledHeaders['apns-id'] = $headers['apns-id'];
         }
 
         if (isset($headers['apns-expiration'])) {
-            $handeledHeaders = $headers['apns-expiration'];
+            $handeledHeaders['apns-expiration'] = $headers['apns-expiration'];
         }
 
         if (isset($headers['apns-priority'])) {
-            $handeledHeaders = $headers['apns-priority'];
+            $handeledHeaders['apns-priority'] = $headers['apns-priority'];
         }
 
         if (isset($headers['apns-topic'])) {
-            $handeledHeaders = $headers['apns-topic'];
+            $handeledHeaders['apns-topic'] = $headers['apns-topic'];
 
             // app’s bundle ID
             // apns-push-type location: app’s bundle ID with.location-query
@@ -329,7 +329,7 @@ class Apn extends PushService implements PushServiceInterface
         }
 
         if (isset($headers['apns-collapse-id'])) {
-            $handeledHeaders = $headers['apns-collapse-id'];
+            $handeledHeaders['apns-collapse-id'] = $headers['apns-collapse-id'];
         }
 
         return $handeledHeaders;
